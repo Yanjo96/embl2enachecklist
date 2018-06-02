@@ -32,7 +32,7 @@ import pdb
 
 
 class Parser:
-    ''' This class contains functions to parse out information from 
+    ''' This class contains functions to parse out information from
     sequence records.
     Args:
         [specific to function]
@@ -68,7 +68,7 @@ class Parser:
             seen = set()
             charset_syms = [e for e in charset_syms if e not in seen and not seen.add(e)]
             # 3.1.2. Remove any multi-word elements
-            charset_syms = [e for e in charset_syms if len(e.split(" "))==1] 
+            charset_syms = [e for e in charset_syms if len(e.split(" "))==1]
         if not charset_syms:
             sys.exit('%s annonex2embl ERROR: Parsing of charset symbol '
                      'unsuccessful')
@@ -77,7 +77,7 @@ class Parser:
 
 
 class Writer:
-    ''' This class contains functions to write tab-separated 
+    ''' This class contains functions to write tab-separated
     spreadsheets for submission via the WEBIN checklist submission system.
     Args:
         [specific to function]
@@ -90,8 +90,92 @@ class Writer:
     def __init__(self):
         pass
 
+    def header(self, checklist_type, outp_handle):
+        out_list = []
+
+        if checklist_type == 'ITS':
+            out_list = ['entrynumber',
+                        'organism_name',
+                        'isolate',
+                        'env_sam',
+                        'country',
+                        'spec_vouch',
+                        'RNA_18S',
+                        'ITS1_feat',
+                        'RNA_58S',
+                        'ITS2_feat',
+                        'RNA_26S',
+                        'sequence'
+                        ]
+
+        elif checklist_type == 'rRNA':
+            out_list = ['entrynumber',
+                        'organism_name',
+                        'sediment',
+                        'isolate',
+                        'isol_source',
+                        'country',
+                        'lat_lon',
+                        'collection_date',
+                        'sequence'
+                        ]
+
+        elif checklist_type == 'trnK_matK':
+            out_list = ['entrynumber',
+                        'organism_name',
+                        'fiveprime_cds',
+                        'threeprime_cds',
+                        'fiveprime_partial',
+                        'threeprime_partial',
+                        'trnK_intron_present',
+                        'isolate',
+                        'spec_vouch',
+                        'country',
+                        'ecotype',
+                        'sequence'
+                        ]
+
+        elif checklist_type == 'IGS':
+            out_list = ['entrynumber',
+                        'organism_name',
+                        'env_sam',
+                        'gene1',
+                        'g1present',
+                        'gene2',
+                        'g2present',
+                        'isolate',
+                        'spec_vouch',
+                        'country',
+                        'sequence'
+                        ]
+
+        elif checklist_type == 'genomic_CDS':
+            out_list = ['entrynumber',
+                        'organism_name',
+                        'env_sam',
+                        'gene_symbol',
+                        'product_name',
+                        'transl_table',
+                        'fiveprime_cds',
+                        'threeprime_cds',
+                        'fiveprime_partial',
+                        'threeprime_partial',
+                        'read_frame',
+                        'isolate',
+                        'spec_vouch',
+                        'country',
+                        'ecotype',
+                        'sequence'
+                        ]
+
+        else:
+            pass
+
+        out_string = '\t'.join(out_list) + '\n'
+        outp_handle.write(out_string)
+
     def genomic_CDS(self, seq_record, counter, charset_syms, outp_handle):
-        ''' This function writes a TSV spreadsheet for submission via 
+        ''' This function writes a TSV spreadsheet for submission via
             the WEBIN checklist submission system.
         Args:
             seq_record (obj)
@@ -119,7 +203,7 @@ class Writer:
 
         # the gene
         the_gene = [f for f in seq_record.features
-                    if f.type=='gene']
+                    if f.type == 'gene']
         try:
             the_gene = the_gene[0]
         except:
@@ -195,7 +279,7 @@ class Writer:
         outp_handle.write(out_string)
 
     def trnK_matK(self, seq_record, counter, outp_handle):
-        ''' This function writes a TSV spreadsheet for submission via 
+        ''' This function writes a TSV spreadsheet for submission via
             the WEBIN checklist submission system.
         Args:
             seq_record (obj)
@@ -224,7 +308,7 @@ class Writer:
         # matK
         try:
             matK_gene = [f for f in gene_features
-                         if 'matK' in f.qualifiers['gene'] and 
+                         if 'matK' in f.qualifiers['gene'] and
                          (f.type=='gene' or f.type=='CDS')]
             matK_gene = matK_gene[0]
         except:
@@ -290,7 +374,7 @@ class Writer:
         outp_handle.write(out_string)
 
     def rRNA(self, seq_record, counter, charset_syms, outp_handle):
-        ''' This function writes a TSV spreadsheet for submission via 
+        ''' This function writes a TSV spreadsheet for submission via
             the WEBIN checklist submission system.
         Args:
             seq_record (obj)
@@ -354,7 +438,7 @@ class Writer:
         outp_handle.write(out_string)
 
     def ITS(self, seq_record, counter, outp_handle):
-        ''' This function writes a TSV spreadsheet for submission via 
+        ''' This function writes a TSV spreadsheet for submission via
             the WEBIN checklist submission system.
         Args:
             seq_record (obj)
@@ -441,7 +525,7 @@ class Writer:
         outp_handle.write(out_string)
 
     def IGS(self, seq_record, counter, charset_syms, outp_handle):
-        ''' This function writes a TSV spreadsheet for submission via 
+        ''' This function writes a TSV spreadsheet for submission via
             the WEBIN checklist submission system.
         Args:
             seq_record (obj)

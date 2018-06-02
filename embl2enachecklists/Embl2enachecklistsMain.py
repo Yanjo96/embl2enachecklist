@@ -53,13 +53,17 @@ def embl2enachecklists(path_to_embl,
 # 1. OPEN OUTFILE
     outp_handle = open(path_to_outfile, 'a')
 
+# 1.1 WRITE HEADER
+    #print checklist_type
+    ClOps.Writer().header(checklist_type, outp_handle)
+
 ########################################################################
 
 # 2. PARSE DATA FROM EMBL-FILE
     try:
         seq_records = SeqIO.parse(open(path_to_embl, "r"), "embl")
     except:
-        sys.exit('%s annonex2embl ERROR: Cannot parse `%s`' % ('\n', 
+        sys.exit('%s annonex2embl ERROR: Cannot parse `%s`' % ('\n',
             colored(path_to_embl, 'red')))
 
 ########################################################################
@@ -114,7 +118,7 @@ def embl2enachecklists(path_to_embl,
 
             else:
                 sys.exit('%s annonex2embl ERROR: Checklist type `%s` '
-                         'not recognized.' % ('\n', 
+                         'not recognized.' % ('\n',
                          colored(checklist_type, 'red')))
 
         except:
