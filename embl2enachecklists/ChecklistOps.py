@@ -168,9 +168,6 @@ class Writer:
                         'sequence'
                         ]
 
-        else:
-            pass
-
         out_string = '\t'.join(out_list) + '\n'
         outp_handle.write(out_string)
 

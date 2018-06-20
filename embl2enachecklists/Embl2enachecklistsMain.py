@@ -44,6 +44,7 @@ import pdb
 # FUNCTIONS #
 #############
 
+
 def embl2enachecklists(path_to_embl,
                        path_to_outfile,
                        checklist_type=None):
@@ -54,7 +55,6 @@ def embl2enachecklists(path_to_embl,
     outp_handle = open(path_to_outfile, 'a')
 
 # 1.1 WRITE HEADER
-    #print checklist_type
     ClOps.Writer().header(checklist_type, outp_handle)
 
 ########################################################################
@@ -128,3 +128,6 @@ def embl2enachecklists(path_to_embl,
 
 # 4. CLOSE OUTFILE
     outp_handle.close()
+
+# 5. Return True if no errors occurred
+    return True
