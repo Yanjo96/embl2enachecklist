@@ -17,7 +17,7 @@ import MyExceptions as ME
 __author__ = 'Michael Gruenstaeudl <m.gruenstaeudl@fu-berlin.de>'
 __copyright__ = 'Copyright (C) 2016-2018 Michael Gruenstaeudl'
 __info__ = 'nex2embl'
-__version__ = '2018.06.21.1730'
+__version__ = '2018.06.22.1400'
 
 #############
 # DEBUGGING #
@@ -91,38 +91,145 @@ class Writer:
         pass
 
     def getKeys(self, checklist_type):
+        ''' Ths function return the keys for the specific Checklist_type
+        Args:
+            checklist_type (string)
+        Returns:
+            keys (list)
+        Raises:
+            -
+        '''
+
         keys = []
-        if checklist_type == "trnK_matK":
-            keys =     ['entrynumber',
-                        'organism_name',
-                        'fiveprime_cds',
-                        'threeprime_cds',
-                        'fiveprime_partial',
-                        'threeprime_partial',
-                        'trnK_intron_present',
-                        'isolate',
-                        'spec_vouch',
-                        'country',
-                        'ecotype',
-                        'sequence'
-                        ]
+        if checklist_type == "ITS":
+            keys = ['entrynumber',
+                    'organism_name',
+                    'isolate',
+                    'env_sam',
+                    'country',
+                    'spec_vouch',
+                    'RNA_18S',
+                    'ITS1_feat',
+                    'RNA_58S',
+                    'ITS2_feat',
+                    'RNA_26S',
+                    'sequence'
+                    ]
+
+        elif checklist_type == "rRNA":
+            keys = ['entrynumber',
+                    'organism_name',
+                    'sediment',
+                    'isolate',
+                    'isol_source',
+                    'country',
+                    'lat_lon',
+                    'collection_date',
+                    'sequence'
+                    ]
+
+        elif checklist_type == "trnK_matK":
+            keys = ['entrynumber',
+                    'organism_name',
+                    'fiveprime_cds',
+                    'threeprime_cds',
+                    'fiveprime_partial',
+                    'threeprime_partial',
+                    'trnK_intron_present',
+                    'isolate',
+                    'spec_vouch',
+                    'country',
+                    'ecotype',
+                    'sequence'
+                    ]
+
+        elif checklist_type == "IGS":
+            keys = ['entrynumber',
+                    'organism_name',
+                    'env_sam',
+                    'gene1',
+                    'g1present',
+                    'gene2',
+                    'g2present',
+                    'isolate',
+                    'spec_vouch',
+                    'country',
+                    'sequence'
+                    ]
+
+        elif checklist_type == "genomic_CDS":
+            keys = ['entrynumber',
+                    'organism_name',
+                    'env_sam',
+                    'gene_symbol',
+                    'product_name',
+                    'transl_table',
+                    'fiveprime_cds',
+                    'threeprime_cds',
+                    'fiveprime_partial',
+                    'threeprime_partial',
+                    'read_frame',
+                    'isolate',
+                    'spec_vouch',
+                    'country',
+                    'ecotype',
+                    'sequence'
+                    ]
+
+        return keys
+
+    def deleteEmptyKeys(self, keys, outp_handle):
+        ''' This function delete the not necessary keys
+            So the ouput is dynamical
+        Args:
+            keys (list)
+            outp_handle (list)
+        Returns:
+            keys (list)
+        Raises:
+            -
+        '''
+        toDelete = []
+        for i in keys:
+            prev = ''
+            isEmpty = False
+            for j in range(len(outp_handle)):
+                if prev == outp_handle[j][i]:
+                    prev = outp_handle[j][i]
+                    isEmpty = True
+                else:
+                    isEmpty = False
+                    break
+
+            if isEmpty:
+                toDelete.append(i)
+
+        for delete in toDelete:
+            j = 0
+            for i in range(len(keys)):
+                if keys[j] == delete:
+                    del keys[j]
+                else:
+                    j = j + 1
+
         return keys
 
 
+
     def writer(self, checklist_type, outp_handle, outp_file):
-
+        ''' This function writes a TSV spreadsheet for submission via
+            the WEBIN checklist submission system.
+        Args:
+            checklist_type (string)
+            outp_handle (list)
+            outp_file (obj)
+        Returns:
+            currently nothing; writes string to file
+        Raises:
+            -
+        '''
         keys = self.getKeys(checklist_type)
-        toDelete = []
-
-        for i in range(len(outp_handle[0])):
-            isEmpty = True
-            for j in range(len(outp_handle)):
-                if not '' == outp_handle[i][j]:
-                    isEmpty = False
-                    break
-            if isEmpty == True:
-                toDelete.append(j)
-
+        keys = self.deleteEmptyKeys(keys, outp_handle)
         out_string = '\t'.join(keys) + '\n'
         outp_file.write(out_string)
 
