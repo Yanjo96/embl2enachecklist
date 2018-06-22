@@ -1,4 +1,3 @@
 *.pyc
-tests/
-tester.sh
-outp_test.tsv
+/tester.sh
+/outp_test.tsv
