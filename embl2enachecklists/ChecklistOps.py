@@ -17,7 +17,7 @@ import MyExceptions as ME
 __author__ = 'Michael Gruenstaeudl <m.gruenstaeudl@fu-berlin.de>'
 __copyright__ = 'Copyright (C) 2016-2018 Michael Gruenstaeudl'
 __info__ = 'nex2embl'
-__version__ = '2018.06.22.1400'
+__version__ = '2018.06.27.2030'
 
 #############
 # DEBUGGING #
@@ -70,8 +70,10 @@ class Parser:
             # 3.1.2. Remove any multi-word elements
             charset_syms = [e for e in charset_syms if len(e.split(" "))==1]
         if not charset_syms:
-            sys.exit('%s annonex2embl ERROR: Parsing of charset symbol '
+            raise ParserError('%s annonex2embl ERROR: Parsing of charset symbol '
                      'unsuccessful')
+            #sys.exit('%s annonex2embl ERROR: Parsing of charset symbol '
+            #         'unsuccessful')
         return charset_syms
 
 
@@ -305,25 +307,24 @@ class Writer:
             out_list["isolate"] = source_qualifiers['isolate'][0]
         except:
             pass
-            #isolate = ''
+
         # SPEC_VOUCH
         try:
             out_list["spec_vouch"] = source_qualifiers['specimen_voucher'][0]
         except:
             pass
-            #spec_vouch = ''
+
         # LOCALITY
         try:
             out_list["country"] = source_qualifiers['country'][0]
         except:
             pass
-            #country = ''
+
         # ECOTYPE
         try:
             out_list["ecotype"] = source_qualifiers['ecotype'][0]
         except:
             pass
-            #ecotype = ''
 
         # SEQUENCE
         out_list["sequence"] = str(seq_record.seq)
@@ -390,19 +391,19 @@ class Writer:
             out_list["isolate"] = source_qualifiers['isolate'][0]
         except:
             pass
-            #isolate = ''
+
         # SPEC_VOUCH
         try:
             out_list["spec_vouch"] = source_qualifiers['specimen_voucher'][0]
         except:
             pass
-            #spec_vouch = ''
+
         # LOCALITY
         try:
             out_list["country"] = source_qualifiers['country'][0]
         except:
             pass
-            #country = ''
+
         # ECOTYPE
         try:
             out_list["ecotype"] = source_qualifiers['ecotype'][0]
@@ -442,7 +443,7 @@ class Writer:
             out_list["isolate"] = source_qualifiers['isolate'][0]
         except:
             pass
-            #isolate = ''
+
         # ISOLATION_SOURCE
         try:
             out_list["isol_source"] = source_qualifiers['isolation_source']
@@ -454,19 +455,19 @@ class Writer:
             out_list["country"] = source_qualifiers['country'][0]
         except:
             pass
-            #country = ''
+
         # ECOTYPE
         try:
             out_list["lat_lon"] = source_qualifiers['lat_lon'][0]
         except:
             pass
-            #lat_lon = ''
+
         # COLLECTION_DATE
         try:
             out_list["collection_date"] = source_qualifiers['collection_date']
         except:
             pass
-            #collection_date = ''
+
 
         # SEQUENCE
         out_list["sequence"] = str(seq_record.seq)

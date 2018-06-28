@@ -18,4 +18,79 @@ __version__ = '2016.02.18.1100'
 
 
 class MyException(Exception):
-    pass
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return(self.value)
+
+    def getErrorNumber(self):
+        return str(1)
+
+    def getErrorName(self):
+        return "MyException"
+
+class FileNotExist(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return(self.value)
+
+    def getErrorNumber(self):
+        return str(2)
+
+    def getErrorName(self):
+        return "FileNotExist"
+
+class WrongInputFile(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return(self.value)
+
+    def getErrorNumber(self):
+        return str(3)
+
+    def getErrorName(self):
+        return "WrongInputFile"
+
+class WrongOutputFile(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return(self.value)
+
+    def getErrorNumber(self):
+        return str(4)
+
+    def getErrorName(self):
+        return "WrongOutputFile"
+
+class ParserError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return(self.value)
+
+    def getErrorNumber(self):
+        return str(5)
+
+    def getErrorName(self):
+        return "ParserError"
+
+class ErrorNotFound(Exception):
+    def __init__(self, value):
+        self.value = "This Error does not exist and should not be seeable"
+
+    def __str__(self):
+        return(self.value)
+
+    def getErrorNumber(self):
+        return str(404)
+
+    def getErrorName(self):
+        return "ErrorNotFound"

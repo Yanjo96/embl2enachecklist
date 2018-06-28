@@ -40,8 +40,7 @@ TO DO
 ###### 4. Have the code automatically add non-mandatory qualifiers as separate columns
 * Ensure that all features that are not mandatory are added as separate columns into the checklist output (and not dropped, as they are now)
 
-###### 5. Write a GUI interface for input
-* The GUI should consist of just one Window, where all functions are immediately visible; the GUI should not have any dropdown-menus. In general, the simpler the interface, the better.
+###### 5. Die outlists in globale variablen speichern
 
 
 CHANGELOG

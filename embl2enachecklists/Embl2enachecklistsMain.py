@@ -27,7 +27,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'embl2enachecklist
 __author__ = 'Michael Gruenstaeudl <m.gruenstaeudl@fu-berlin.de>'
 __copyright__ = 'Copyright (C) 2016-2018 Michael Gruenstaeudl'
 __info__ = 'embl2enachecklists'
-__version__ = '2018.06.21.1730'
+__version__ = '2018.06.27.2030'
 
 #############
 # DEBUGGING #
@@ -63,8 +63,8 @@ def embl2enachecklists(path_to_embl,
     try:
         seq_records = SeqIO.parse(open(path_to_embl, "r"), "embl")
     except:
-        sys.exit('%s annonex2embl ERROR: Cannot parse `%s`' % ('\n',
-            colored(path_to_embl, 'red')))
+        raise ME.FileNotExist(path_to_embl + " does not exists")
+        #sys.exit('%s annonex2embl ERROR: Cannot parse `%s`' % ('\n', colored(path_to_embl, 'red')))
 
 ########################################################################
 
@@ -133,7 +133,7 @@ def embl2enachecklists(path_to_embl,
                 keyw = ['trnK', 'matK']
                 if any(elem in keyw for elem in charset_syms):
                     out_list = ClOps.Writer().trnK_matK(seq_record, counter,
-                                             out_list)
+                                            out_list)
                 else:
                     sys.exit('%s annonex2embl ERROR: None of the keywords (`%s`) present in '
                              'charset symbols: `%s`' % ('\n', colored(keyw, 'red'), colored(charset_syms, 'red')))
@@ -189,7 +189,7 @@ def embl2enachecklists(path_to_embl,
             outp_handle.append(out_list)
 
         except:
-            raise ME.MyException('%s annonex2embl ERROR: Processing of record `%s` failed.' % ('\n', colored(seq_record.name, 'red')))
+            #raise ME.MyException('%s annonex2embl ERROR: Processing of record `%s` failed.' % ('\n', colored(seq_recoguird.name, 'red')))
 
 ########################################################################
 
