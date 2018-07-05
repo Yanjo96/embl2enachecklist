@@ -14,6 +14,8 @@ import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'embl2enachecklists'))
 
 import Embl2enachecklistsMain as EMBL2ENAclMain
+import globalVariables as GlobVars
+import MyExceptions as ME
 
 ###############
 # AUTHOR INFO #
@@ -46,7 +48,7 @@ import pdb
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description="  --  ".join([__author__, __copyright__, __info__, __version__]))
-    
+
     # Required
     parser.add_argument('-e',
                         '--embl',
@@ -77,6 +79,17 @@ if __name__ == '__main__':
 # MAIN #
 ########
 
-    EMBL2ENAclMain.embl2enachecklists(  args.embl,
-                                        args.outfile,
-                                        args.cltype )
+    try:
+        if args.embl.split('.')[-1] == 'embl':
+            EMBL2ENAclMain.embl2enachecklists(args.embl, "output/" + args.outfile + ".enachecklist" ,args.cltype )
+            if len(GlobVars.warnings) != 0:
+                for warning in GlobVars.warnings:
+                    print warning
+            print 'Done! :D You can find your output here: ' + "output/" + args.outfile + ".enachecklist"
+        else:
+            raise ME.WrongInputFile('Error: ' + args.embl + ' is not in embl format')
+    except Exception as error:
+        try:
+            print error.value
+        except:
+            print error

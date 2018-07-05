@@ -8,6 +8,12 @@ INPUT
 * EMBL flatfile
 
 
+FEATURES
+-------------
+* Checks if the type of DNA marker specified by the user is indeed present in the embl-input file (specifically in as qualifier value for a qualifier named "gene", "note" or "standard_name")
+
+
+
 GENERAL USAGE
 -------------
 
@@ -28,12 +34,18 @@ python2 scripts/embl2enachecklists_CMD.py
 ```
 
 
+PREREQUISITES
+-------------
+* Input files must have the name of the DNA marker (e.g., "matK", "ITS") as qualifier value for a qualifier named "gene", "note" or "standard_name"
+
+
+
 TO DO
 -----
 
 ###### 1. An error in processing a sequence should break only the iteration of the loop, not the entire code execution.
 
-###### 2. Not all qualifiers of a gene have the name `'gene'`. Sometimes they are named `'note'` or `'standard_name'`. Adjust code to allow this.
+###### 2. add ETS feature
 
 ###### 3. Write untitests for the functions in `ChecklistOps.py`
 

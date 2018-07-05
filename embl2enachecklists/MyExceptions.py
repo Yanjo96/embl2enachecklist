@@ -12,85 +12,84 @@ __copyright__ = 'Copyright (C) 2016-2017 Michael Gruenstaeudl'
 __info__ = 'nex2embl'
 __version__ = '2016.02.18.1100'
 
+#################################
+# implemented exception by now: #
+#################################
+
+# MyException                   : should be removed in future
+# FileNotExist                  : raise when the Inputfile not exists
+# WrongInputFile                : raise when the inputfile is not in the correct format
+# WrongOutputFile               : should be removed in future cause the program forms his own outputfile
+# ParserError                   : raise when something went wrong while parsing the inputfile
+# CheckListTypeNotKnownError    : raise when the seleceted Checklist type is not known yet
+# MinimalPrerequisitesNotMet    : raise when the minimal prerequisites not met with the known minimal prerequisites for specific checklist type
+# FeaturePrerequisutesNotMet    : raise when the feature prerequisites not met with the known feature prerequisites for specific checklist type
+# ErrorNotFound                 : raise when non of the existing errors raise so the new error can be implemented to the code
+
 ###########
 # CLASSES #
 ###########
 
+class mainException():
+    def __str__(self):
+        return(self.value)
 
-class MyException(Exception):
+    def getErrorNumber(self):
+        return str(self.number)
+
+    def getErrorName(self):
+        return self.name
+
+class MyException(Exception, mainException):
     def __init__(self, value):
         self.value = value
+        self.number = 1
+        self.name = "MyException"
 
-    def __str__(self):
-        return(self.value)
-
-    def getErrorNumber(self):
-        return str(1)
-
-    def getErrorName(self):
-        return "MyException"
-
-class FileNotExist(Exception):
+class FileNotExist(Exception, mainException):
     def __init__(self, value):
         self.value = value
+        self.number = 2
+        self.name = "FileNotExist"
 
-    def __str__(self):
-        return(self.value)
-
-    def getErrorNumber(self):
-        return str(2)
-
-    def getErrorName(self):
-        return "FileNotExist"
-
-class WrongInputFile(Exception):
+class WrongInputFile(Exception, mainException):
     def __init__(self, value):
         self.value = value
+        self.number = 3
+        self.name = "WrongInputFile"
 
-    def __str__(self):
-        return(self.value)
-
-    def getErrorNumber(self):
-        return str(3)
-
-    def getErrorName(self):
-        return "WrongInputFile"
-
-class WrongOutputFile(Exception):
+class WrongOutputFile(Exception, mainException):
     def __init__(self, value):
         self.value = value
+        self.number = 4
+        self.name = "WrongOutputFile"
 
-    def __str__(self):
-        return(self.value)
-
-    def getErrorNumber(self):
-        return str(4)
-
-    def getErrorName(self):
-        return "WrongOutputFile"
-
-class ParserError(Exception):
+class ParserError(Exception, mainException):
     def __init__(self, value):
         self.value = value
+        self.number = 5
+        self.name = "ParserError"
 
-    def __str__(self):
-        return(self.value)
-
-    def getErrorNumber(self):
-        return str(5)
-
-    def getErrorName(self):
-        return "ParserError"
-
-class ErrorNotFound(Exception):
+class CheckListTypeNotKnownError(Exception, mainException):
     def __init__(self, value):
-        self.value = "This Error does not exist and should not be seeable"
+        self.value = value
+        self.number = 6
+        self.name = "CheckListTypeNotKnownError"
 
-    def __str__(self):
-        return(self.value)
+class MinimalPrerequisitesNotMet(Exception, mainException):
+    def __init__(self, value):
+        self.value = value
+        self.number = 7
+        self.name = "MinimalPrerequisitesNotMet"
 
-    def getErrorNumber(self):
-        return str(404)
+class FeaturePrerequisutesNotMet(Exception, mainException):
+    def __init__(self, value):
+        self.value = value
+        self.number = 8
+        self.name = "FeaturePrerequisutesNotMet"
 
-    def getErrorName(self):
-        return "ErrorNotFound"
+class ErrorNotFound(Exception, mainException):
+    def __init__(self, value):
+        self.value = value
+        self.number = 404
+        self.name = "ErrorNotFound"

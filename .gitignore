@@ -1,3 +1,4 @@
 *.pyc
 /tester.sh
 /outp_test.tsv
+*.enachecklist
