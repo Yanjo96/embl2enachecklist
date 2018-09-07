@@ -30,7 +30,7 @@ __version__ = '2016.02.18.1100'
 # CLASSES #
 ###########
 
-class mainException():
+class MainException():
     def __str__(self):
         return(self.value)
 
@@ -40,55 +40,55 @@ class mainException():
     def getErrorName(self):
         return self.name
 
-class MyException(Exception, mainException):
+class MyException(Exception, MainException):
     def __init__(self, value):
         self.value = value
         self.number = 1
         self.name = "MyException"
 
-class FileNotExist(Exception, mainException):
+class FileNotExist(Exception, MainException):
     def __init__(self, value):
         self.value = value
         self.number = 2
         self.name = "FileNotExist"
 
-class WrongInputFile(Exception, mainException):
+class WrongInputFile(Exception, MainException):
     def __init__(self, value):
         self.value = value
         self.number = 3
         self.name = "WrongInputFile"
 
-class WrongOutputFile(Exception, mainException):
+class WrongOutputFile(Exception, MainException):
     def __init__(self, value):
         self.value = value
         self.number = 4
         self.name = "WrongOutputFile"
 
-class ParserError(Exception, mainException):
+class ParserError(Exception, MainException):
     def __init__(self, value):
         self.value = value
         self.number = 5
         self.name = "ParserError"
 
-class CheckListTypeNotKnownError(Exception, mainException):
+class CheckListTypeNotKnownError(Exception, MainException):
     def __init__(self, value):
         self.value = value
         self.number = 6
         self.name = "CheckListTypeNotKnownError"
 
-class MinimalPrerequisitesNotMet(Exception, mainException):
+class MinimalPrerequisitesNotMet(Exception, MainException):
     def __init__(self, value):
         self.value = value
         self.number = 7
         self.name = "MinimalPrerequisitesNotMet"
 
-class FeaturePrerequisutesNotMet(Exception, mainException):
+class FeaturePrerequisutesNotMet(Exception, MainException):
     def __init__(self, value):
         self.value = value
         self.number = 8
         self.name = "FeaturePrerequisutesNotMet"
 
-class ErrorNotFound(Exception, mainException):
+class ErrorNotFound(Exception, MainException):
     def __init__(self, value):
         self.value = value
         self.number = 404

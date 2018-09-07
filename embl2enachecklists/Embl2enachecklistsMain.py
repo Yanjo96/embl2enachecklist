@@ -10,6 +10,7 @@ import MyExceptions as ME
 import ChecklistOps as ClOps
 import PrerequisiteOps as PreOps
 import globalVariables as GlobVars
+import Tkinter as tk
 import sys
 import os
 
@@ -45,11 +46,25 @@ import pdb
 #############
 # FUNCTIONS #
 #############
+def embl2enachecklists(path_to_embl, path_to_outfile, inputFormat, checklist_type=None, env_sample='no'):
+    '''Main functions
 
+    This function does the pipeline job
+    It execute all functions of the programm in the right order
 
+    Args:
+        path_to_embl (String)
+        path_to_outfile (String)
+        checklist_type (String)
 
-def embl2enachecklists(path_to_embl, path_to_outfile, checklist_type=None):
+    Returns:
+        bool : True if nithing goes wrong
+    Raises:
+        Give all the errors whicxh occur to the GUI or CMD function so it can
+        drop the error for the user
+    '''
 
+    globalvariables = GlobVars.GlobalVariables()
 ########################################################################
 
 # 1. OPEN OUTFILE
@@ -59,7 +74,7 @@ def embl2enachecklists(path_to_embl, path_to_outfile, checklist_type=None):
 
 # 2. PARSE DATA FROM EMBL-FILE
     try:
-        seq_records = SeqIO.parse(open(path_to_embl, "r"), "embl")
+        seq_records = SeqIO.parse(open(path_to_embl, "r"), inputFormat)
     except:
         raise ME.FileNotExist(path_to_embl + " does not exists")
 
@@ -73,48 +88,33 @@ def embl2enachecklists(path_to_embl, path_to_outfile, checklist_type=None):
             target_qualifiers = ['gene','note','standard_name']
             marker_abbrev = ClOps.Parser().parse_marker_abbrevs(seq_record, target_qualifiers)
 
-    # 3.2. Check if marker abbreviation has implemented checklist type if not it skip this seq_record
-            if PreOps.checkMinimalPrerequisites(checklist_type, marker_abbrev):
-                pass
-            else:
-                raise ME.MinmalPrerequisitesNotMet('The minimal prerequisites are not met')
+    # 3.2.1. Check if marker abbreviation has implemented checklist type if not it skip this seq_record
+            PreOps.Checker().checkMinimalPrerequisites(checklist_type, marker_abbrev)
 
-    # 3.3. Check if marker abbreviation has implemented checklist type if not it skip this seq_record
-            if PreOps.checkFeaturePrerequisites(checklist_type, seq_record.features):
-                pass
-            else:
-                raise ME.FeaturePrerequisutesNotMet('Youre features: "' + ' '.join(seq_record.features) + '" are not part of the allowed Marker abbreviations')
+    # 3.2.2. Check if marker abbreviation has implemented checklist type if not it skip this seq_record
+            PreOps.Checker().checkFeaturePrerequisites(checklist_type, seq_record.features)
 
-    # 3.4. Check if marker abbreviation has implemented checklist type if not it skip this seq_record
-            if not checkCorrectCheckListType(checklist_type, marker_abbrev):
-                print checkCorrectCheckListType(checklist_type, marker_abbrev)
+    # 3.2.3. Check if marker abbreviation has implemented checklist type if not it skip this seq_record
+            if not PreOps.Checker().checkCorrectCheckListType(checklist_type, marker_abbrev):
                 GlobVars.warnings.append('Warning: Checklist type not found as marker abbreviation: `%s`' % (marker_abbrev))
                 continue
 
-    # 3.5. Conversion to checklist format
-            if checklist_type == 'ITS':
-                outdict = ClOps.Writer().ITS(seq_record, counter, GlobVars.getOutdict(checklist_type))
+    # 3.3. Conversion to checklist format
+            outdict = ClOps.Parser().mandatoryQualifiers(seq_record,
+                                                         marker_abbrev,
+                                                         counter,
+                                                         checklist_type,
+                                                         env_sample)
 
-            elif checklist_type == 'rRNA':
-                outdict = ClOps.Writer().rRNA(seq_record, counter, marker_abbrev,  GlobVars.getOutdict(checklist_type))
 
-            elif checklist_type == 'trnK_matK':
-                outdict = ClOps.Writer().trnK_matK(seq_record, counter, GlobVars.getOutdict(checklist_type))
+    # 3.4. When outdict wasnt False it will add the optional qualifiers
+            if outdict:
+                optional_qualifiers = ClOps.Parser().optionalQualifiers(seq_record, globalvariables.getQualifiers(checklist_type,'o'))
+                outdict.update(optional_qualifiers)
+                outp_handle.append(outdict)
 
-            elif checklist_type == 'IGS':
-                outdict = ClOps.Writer().IGS(seq_record, counter, marker_abbrev, GlobVars.getOutdict(checklist_type))
-
-            elif checklist_type == 'genomic_CDS':
-                outdict = ClOps.Writer().genomic_CDS(seq_record, counter, GlobVars.getOutdict(checklist_type))
-
-            outp_handle.append(outdict)
-
-        except ME.ParserError as parserError:
-            raise parserError
-
-        except Exception as warning:
-            GlobVars.warnings.append('Warning: Processing of record `%s` failed.' % (seq_record.id))
-            continue
+        except Exception as error:
+            raise error
 
 ########################################################################
 
