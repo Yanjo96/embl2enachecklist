@@ -9,8 +9,8 @@ Class for custom exceptions
 
 __author__ = 'Michael Gruenstaeudl <m.gruenstaeudl@fu-berlin.de>'
 __copyright__ = 'Copyright (C) 2016-2017 Michael Gruenstaeudl'
-__info__ = 'nex2embl'
-__version__ = '2016.02.18.1100'
+__info__ = 'embl2enachecklist'
+__version__ = '2018.10.04, Version 0.1.0'
 
 #################################
 # implemented exception by now: #

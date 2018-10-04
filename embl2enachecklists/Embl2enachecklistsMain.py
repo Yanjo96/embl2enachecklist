@@ -15,7 +15,6 @@ import sys
 import os
 
 from Bio import SeqIO
-from termcolor import colored
 
 # Add specific directory to sys.path in order to import its modules
 # NOTE: THIS RELATIVE IMPORTING IS AMATEURISH.
@@ -30,7 +29,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'embl2enachecklist
 __author__ = 'Michael Gruenstaeudl <m.gruenstaeudl@fu-berlin.de>'
 __copyright__ = 'Copyright (C) 2016-2018 Michael Gruenstaeudl'
 __info__ = 'embl2enachecklists'
-__version__ = '2018.06.27.2030'
+__version__ = '2018.10.04, Version 0.1.0'
 
 #############
 # DEBUGGING #
@@ -85,7 +84,7 @@ def embl2enachecklists(path_to_embl, path_to_outfile, inputFormat, checklist_typ
         try:
             outdict = {}
     # 3.1. Extraction of marker abbreviations
-            target_qualifiers = ['gene','note','standard_name']
+            target_qualifiers = ['gene','note','standard_name','product']
             marker_abbrev = ClOps.Parser().parse_marker_abbrevs(seq_record, target_qualifiers)
 
     # 3.2.1. Check if marker abbreviation has implemented checklist type if not it skip this seq_record

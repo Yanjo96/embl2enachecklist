@@ -1,0 +1,30 @@
+ID   Daubryana; SV 1; linear; genomic DNA; ; PLN; 801 BP.
+XX
+AC   Daubryana;
+XX
+DE   Dracaena aubryana tRNA-Lys (trnK) gene, partial cds; tRNA-Lys (trnK)
+DE   intron, complete sequence; maturase K (matK) gene, complete cds;
+DE   photosystem II protein D1 (psbA) gene, partial cds, isolate Daubryana
+XX
+OS   .
+OC   .
+XX
+RN   [1]
+RA   FooBarBaz
+RT   ;
+RL   Submitted (27-MAR-2018) to the INSDC.
+RL   FooBarBaz
+RL   Address here
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   source          1..60
+FT                   /organism="Dracaena aubryana"
+FT                   /isolate="isolate"
+FT   gene            <1..20
+FT                   /gene="ETS"
+FT                   /product="maturase K"
+XX
+SQ   Sequence 60 BP; 25 A; 13 C; 9 G; 13 T; 0 other;
+     atccactata ataatgagaa agagttctac atacccgacc gaatcgatca agaatatcag        60
+//

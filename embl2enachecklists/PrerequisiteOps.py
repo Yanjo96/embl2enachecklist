@@ -26,7 +26,7 @@ import MyExceptions as ME
 __author__ = 'Michael Gruenstaeudl <m.gruenstaeudl@fu-berlin.de>'
 __copyright__ = 'Copyright (C) 2016-2018 Michael Gruenstaeudl'
 __info__ = 'embl2enachecklist'
-__version__ = '2018.07.17'
+__version__ = '2018.10.04, Version 0.1.0'
 
 
  ######  ####### ######  #     #  #####   #####  ### #     #  #####
@@ -87,6 +87,7 @@ class Checker:
         if not checklist_type in GlobVars.allowed_checklists:
             raise ME.MinimalPrerequisitesNotMet(checklist_type + ' is not an implemented checklist type')
         #NACHFRAGEN wegen IGS marker abbreviation sind nicht fest
+
         if not any(elem in " ".join(marker_abbrev) for elem in GlobVars.allowed_marker_abbrev) and checklist_type != 'IGS':
             raise ME.MinimalPrerequisitesNotMet('The minimal prerequisites are not met')
 
@@ -124,7 +125,7 @@ class Checker:
         Raises:
             -
         """
-        if checklist_type == 'ETS' and 'ETS' in marker_abbrev:
+        if checklist_type == 'ETS' and 'ETS' in "".join(marker_abbrev):
             return True
         if checklist_type == 'ITS' and any(elem in " ".join(marker_abbrev) for elem in GlobVars.allowed_its_marker_abbrev):
             return True

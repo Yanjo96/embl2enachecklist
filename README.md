@@ -17,20 +17,27 @@ FEATURES
 GENERAL USAGE
 -------------
 
+###### GUI
+```
+python2 scripts/embl2enachecklists_GUI.py
+```
+
 ###### Checklist 'trnK_matK'
 ```
 python2 scripts/embl2enachecklists_CMD.py
--e examples/input/matK.embl
--o examples/output/matK_SubmissionChecklist.tsv
+-i examples/input/ETS.embl
+-o examples/output/ETS.tsv
 -c trnK_matK
+-e no
 ```
 
 ###### Checklist 'IGS'
 ```
 python2 scripts/embl2enachecklists_CMD.py
--e examples/input/trnL-trnF.embl
--o examples/output/trnL-trnF_SubmissionChecklist.tsv
+-i examples/input/trnL-trnF.embl
+-o examples/output/trnL-trnF.tsv
 -c IGS
+-e no
 ```
 
 
@@ -40,23 +47,16 @@ PREREQUISITES
 
 
 
-TO DO
------
-
-###### 1. An error in processing a sequence should break only the iteration of the loop, not the entire code execution.
-
-###### 2. add ETS feature
-
-###### 3. Write untitests for the functions in `ChecklistOps.py`
-
-###### 4. Have the code automatically add non-mandatory qualifiers as separate columns
-* Ensure that all features that are not mandatory are added as separate columns into the checklist output (and not dropped, as they are now)
-
-###### 5. Die outlists in globale variablen speichern
-
-
 CHANGELOG
 ---------
+###### Version 0.1.0 (2018.10.04)
+* dynamically output
+* add checklist type ETS and gene_intron
+* add argument environmental to commandline
+* add GUI
+* add error messages
+* add warning messages
+* add support for genbank files
 ###### Version 0.0.2 (2018.05.22)
 * Generated separate function to extract charset symbols
 * Updated README

@@ -31,8 +31,8 @@ import MyExceptions as ME
 
 __author__ = 'Michael Gruenstaeudl <m.gruenstaeudl@fu-berlin.de>'
 __copyright__ = 'Copyright (C) 2016-2018 Michael Gruenstaeudl'
-__info__ = 'nex2embl'
-__version__ = '2018.06.27.2030'
+__info__ = 'embl2enachecklist'
+__version__ = '2018.10.04, Version 0.1.0'
 
 
 
@@ -122,7 +122,6 @@ class Writer:
         Raises:
             -
         '''
-
         translator = GlobVars.GlobalVariables().getTranslator(checklist_type)
         keys = self.deleteEmptyKeys(checklist_type, outp_handle)
         for out_list in outp_handle:
@@ -224,7 +223,6 @@ class Parser:
             it will not raise any errors cause it only give warnings for the specific
             seq_record
         '''
-
         outdict = GlobVars.GlobalVariables().getOutdict(GlobVars.GlobalVariables().getQualifiers(checklist_type, 'm'))
                                                          #####  ######   #####
           ####  ###### #    #  ####  #    # #  ####     #     # #     # #     #
@@ -284,8 +282,11 @@ class Parser:
                 try:
                     outdict["gene"] = [f.qualifiers['gene'] for f in seq_record.features if f.type=='CDS'][0][0]
                 except:
-                    GlobVars.warnings.append('Warning: The mandatory feature "%s" in "%s" is missing.' % ('gene', seq_record.id))
-                    return False
+                    try:
+                        outdict["gene"] = [f.qualifiers['gene'] for f in seq_record.features if f.type=='intron'][0][0]
+                    except:
+                        GlobVars.warnings.append('Warning: The mandatory feature "%s" in "%s" is missing.' % ('gene', seq_record.id))
+                        return False
 
             try:
                 intron = [f for f in seq_record.features if f.type=='intron'][0]
@@ -351,8 +352,12 @@ class Parser:
                     trnK_intron_present = 'no'
                     for t in gene_features:
                         if t.type == "intron":
-                            if 'trnK' in t.qualifiers['gene']:
-                                trnK_intron_present = 'yes'
+                            try:
+                                if 'trnK' in t.qualifiers['gene']:
+                                    trnK_intron_present = 'yes'
+                            except:
+                                if 'trnK' in t.qualifiers['note']:
+                                    trnK_intron_present = 'yes'
                     outdict['trnK_intron_present'] = trnK_intron_present
                 except:
                     outdict['trnK_intron_present'] = 'no'
@@ -363,7 +368,7 @@ class Parser:
             # matK
             matK_gene = None
             try:
-                for gene in [f for f in gene_features if f.type=="gene"]:
+                for gene in [f for f in gene_features if f.type=="gene" or f.type=="CDS"]:
                     if "gene" in gene.qualifiers:
                         if 'matK' in gene.qualifiers['gene']:
                             matK_gene = gene
@@ -494,20 +499,44 @@ class Parser:
                     outdict["RNA_28S"] = 'no'
                     outdict["ITS2_feat"] = 'partial'
             except:
-                outdict["RNA_18S"] = 'no'
-                outdict["ITS1_feat"] = 'partial'
-                outdict["RNA_28S"] = 'no'
-                outdict["ITS2_feat"] = 'partial'
+                try:
+                    gene_seqrec_features = " ".join([f.qualifiers['note'] for f in seq_record.features if f.type=='misc_RNA'][0])
+                    # 18S ITS1
+                    if '18S' in gene_seqrec_features:
+                        outdict["RNA_18S"] = 'partial'
+                        outdict["ITS1_feat"] = 'complete'
+                    else:
+                        outdict["RNA_18S"] = 'no'
+                        outdict["ITS1_feat"] = 'partial'
+                    # 28S ITS2
+                    if '28S' in gene_seqrec_features or '26S' in gene_seqrec_features:
+                        outdict["RNA_28S"] = 'partial'
+                        outdict["ITS2_feat"] = 'complete'
+                    else:
+                        outdict["RNA_28S"] = 'no'
+                        outdict["ITS2_feat"] = 'partial'
+                except:
+                    outdict["RNA_18S"] = 'no'
+                    outdict["ITS1_feat"] = 'partial'
+                    outdict["RNA_28S"] = 'no'
+                    outdict["ITS2_feat"] = 'partial'
 
             # 58S
             try:
                 note_seqrec_features = " ".join([f.qualifiers['note'] for f in seq_record.features if f.type=='misc_feature'][0])
-                if 'ITS1' in note_seqrec_features and 'ITS2' in note_seqrec_features:
+                if any(elem in note_seqrec_features for elem in ['ITS1','internal transcribed spacer 1'] ) and any(elem in note_seqrec_features for elem in ['ITS2','internal transcribed spacer 1']):
                     outdict["RNA_58S"] = 'complete'
                 else:
                     outdict["RNA_58S"] = 'partial'
             except:
-                outdict["RNA_58S"] = 'partial'
+                try:
+                    note_seqrec_features = " ".join([f.qualifiers['note'] for f in seq_record.features if f.type=='misc_RNA'][0])
+                    if any(elem in note_seqrec_features for elem in ['ITS1','internal transcribed spacer 1'] ) and any(elem in note_seqrec_features for elem in ['ITS2','internal transcribed spacer 2']):
+                        outdict["RNA_58S"] = 'complete'
+                    else:
+                        outdict["RNA_58S"] = 'partial'
+                except:
+                    outdict["RNA_58S"] = 'partial'
 
             # SEQUENCE
             try:
@@ -594,7 +623,7 @@ class Parser:
 
             #TOEDIT
             try:
-                outdict["ets_type"] = "3'"
+                outdict["ets_type"] = "5'"
             except:
                 GlobVars.warnings.append('Warning: The mandatory feature "%s" in "%s" is missing.' % ('ets_type', seq_record.id))
                 return False
@@ -668,7 +697,6 @@ class Parser:
                 for i in t:
                     tmp.append(i.split(":"))
             pcrPrimers = tmp
-            print pcrPrimers
             fwd_name = []
             fwd_seq = []
             rev_name = []

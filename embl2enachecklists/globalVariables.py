@@ -27,7 +27,7 @@ import collections
 __author__ = 'Michael Gruenstaeudl <m.gruenstaeudl@fu-berlin.de>'
 __copyright__ = 'Copyright (C) 2016-2018 Michael Gruenstaeudl'
 __info__ = 'embl2enachecklist'
-__version__ = '2018.07.17'
+__version__ = '2018.10.04, Version 0.1.0'
 
 
  ######  ####### ######  #     #  #####   #####  ### #     #  #####
@@ -61,12 +61,12 @@ entryfg = "black"
 
 
 #NACHFRAGEN
-allowed_marker_abbrev = ['ITS','ITS1','ITS2','18S','28S','trnK','matK','IGS','genomic_CDS','trnL','trnF','ETS','gene','intron']
+allowed_marker_abbrev = ['internal transcribed spacer','ITS','ITS1','ITS2','16S','18S','28S','trnK','matK','IGS','genomic_CDS','trnL','trnF','ETS','gene','intron','rpl16']
 allowed_rrna_marker_abbrev = ['18S','28S']
-allowed_its_marker_abbrev = ['ITS','ITS1','ITS2']
+allowed_its_marker_abbrev = ['internal transcribed spacer','ITS','ITS1','ITS2']
 allowed_gene_intron_abbrev = ['gene','intron']
 genomic_CDS_marker_abbrev = ['gene','CDS']
-allowed_checklists = ['ITS','ETS','rRNA','trnK_matK','IGS','genomic_CDS','gene_intron']
+allowed_checklists = ['ITS','ETS','rRNA','trnK_matK','IGS','gene_intron']#,'genomic_CDS']
 
 
   #####  #          #     #####   #####
@@ -180,7 +180,7 @@ class GlobalVariables():
                                    'clone':'CLONE','strain':'STRAIN','variety':'VARIETY','cultivar':'CULTIVAR','breed':'BREED',
                                    'ecotype':'ECOTYPE','mating_type':'MATING_TYPE','sex':'SEX','isolation_source':'ISOLATION_SOURCE',
                                    'host':'HOST','tissue_type':'TISSUE','country':'COUNTRY','locality':'LOCALITY','lat_lon':'LAT_LON',
-                                   'collection_date':'COLDATE','collected_by':'COL_BY','specimen_voucher':'SPEC_VOUCH','bio_material':'BIO_MAT',
+                                   'collection_date':'COLDATE','collected_by':'COL_BY','culture_collection':'CULT_COLL','specimen_voucher':'SPEC_VOUCH','bio_material':'BIO_MAT',
                                    'fwd_name1':'FWD_NAME1','fwd_seq1':'FWD_SEQ1','rev_name1':'REV_NAME1','rev_seq1':'REV_SEQ1',
                                    'fwd_name2':'FWD_NAME2','fwd_seq2':'FWD_SEQ2','rev_name2':'REV_NAME2','rev_seq2':'REV_SEQ2',
                                    'sequence':'SEQUENCE'},

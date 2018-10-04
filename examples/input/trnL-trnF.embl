@@ -1,0 +1,200 @@
+ID   AC0003; SV 1; linear; genomic DNA; ; PLN; 929 BP.
+XX
+AC   AC0003;
+XX
+DE   Achyranthes bidentata trnT-trnL intergenic spacer, partial sequence;
+DE   tRNA-Leu (trnL) gene, complete sequence; trnL-trnF intergenic spacer,
+DE   complete sequence; and tRNA-Phe (trnF) gene, partial sequence, isolate
+DE   AC0003
+XX
+OS   .
+OC   .
+XX
+RN   [1]
+RA   Di Vincenzo V.; Gruenstaeudl M.
+RT   ;
+RL   Submitted (27-MAR-2018) to the INSDC.
+RL   Di Vincenzo V., Institut fuer Biologie-Botanik, Freie Universitaet 
+RL   Berlin, Altensteinstr 6, 14195 Berlin, Germany
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   source          1..929
+FT                   /country="China: Kunming"
+FT                   /mol_type="genomic DNA"
+FT                   /isolate="AC0003"
+FT                   /organism="Achyranthes bidentata"
+FT                   /specimen_voucher="T. Borsch s.n."
+FT   misc_feature    1..91
+FT                   /note="trnT-trnL intergenic spacer"
+FT   gene            join(92..125,360..564)
+FT                   /gene="trnL"
+FT                   /product="tRNA-Leu"
+FT   tRNA            join(92..125,360..564)
+FT                   /gene="trnL"
+FT                   /product="tRNA-Leu"
+FT   intron          125..359
+FT                   /gene="trnL"
+FT   misc_feature    360..892
+FT                   /note="trnL-trnF intergenic spacer"
+FT   gene            893..>929
+FT                   /gene="trnF"
+FT                   /product="tRNA-Phe"
+FT   tRNA            893..>929
+FT                   /gene="trnF"
+FT                   /product="tRNA-Phe"
+XX
+SQ   Sequence 929 BP; 344 A; 150 C; 176 G; 259 T; 0 other;
+     atctaatgaa ttcgatggtt ccgtcagaac tgaaagaaaa agaataaagg ggaaagacat        60
+     cacactgaga tccgaatttt ataacaaaaa aggggatatg gcgaaatcgg tagacgctac       120
+     ggacttaatt ggcttgagcc ttagtatgga gacctactaa gtgaaaactt tcaaattcag       180
+     agaaaccctg gaattaataa aaaaatgggc aatcctgagc caactccttt attaggaaaa       240
+     aaaaagaatt cagaaaacaa aaaaaaaaac aaaggatagg tgcagagact caaaggaagc       300
+     tgttctaaca aatggagttg actgtgctgt gttgttctaa gaattctaca tcaattcaag       360
+     ttgaaatttg aaaaaagaat caaatattca ttcatcaaat cattcactcc atagtctgat       420
+     agatcttttg aagagctgat taatcggacg agaataaaga tagagtccca ttctacatgt       480
+     caatactgac aacaatgaaa tttatagtaa gaggaaaatc cgtcgacttt taaaatcgtg       540
+     agggttcaag tccctctatc cccaaaagct tttttactcc cgaactagtt atcctttttt       600
+     tcttttcaaa atggatccgg acggaagcat ttttctctta taacaagtct tgtgatatat       660
+     gatagacgta caaatgacta tctttgagta aggagtactc aattgaatga ttcacaattc       720
+     atattattac tcacactaat caaattatag acaaatttgg aattggaaga ccaaagagat       780
+     tccggtacct agataagact ttgtaatgcc tttctttttt tttttttaat tgacatagac       840
+     ccgacttatc gagtaaaatg agaagatgat gcgacagaag ggcgaatgaa tagtcgggat       900
+     agctcagctg gtagagcaga ggactgaaa                                         929
+//
+ID   AC0055; SV 1; linear; genomic DNA; ; PLN; 1208 BP.
+XX
+AC   AC0055;
+XX
+DE   Calicorema capitata trnT-trnL intergenic spacer, partial sequence; tRNA-Leu
+DE   (trnL) gene, complete sequence; trnL-trnF intergenic spacer, complete
+DE   sequence; and tRNA-Phe (trnF) gene, partial sequence, isolate AC0055
+XX
+OS   .
+OC   .
+XX
+RN   [1]
+RA   Di Vincenzo V.; Gruenstaeudl M.
+RT   ;
+RL   Submitted (27-MAR-2018) to the INSDC.
+RL   Di Vincenzo V., Institut fuer Biologie-Botanik, Freie Universitaet 
+RL   Berlin, Altensteinstr 6, 14195 Berlin, Germany
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   source          1..1208
+FT                   /country="Namibia"
+FT                   /mol_type="genomic DNA"
+FT                   /isolate="AC0055"
+FT                   /organism="Calicorema capitata"
+FT                   /specimen_voucher="C. Neinhuis s.n. (B)"
+FT   misc_feature    1..96
+FT                   /note="trnT-trnL intergenic spacer"
+FT   gene            join(97..130,578..833)
+FT                   /gene="trnL"
+FT                   /product="tRNA-Leu"
+FT   tRNA            join(97..130,578..833)
+FT                   /gene="trnL"
+FT                   /product="tRNA-Leu"
+FT   intron          130..577
+FT                   /gene="trnL"
+FT   misc_feature    578..1169
+FT                   /note="trnL-trnF intergenic spacer"
+FT   gene            1170..>1208
+FT                   /gene="trnF"
+FT                   /product="tRNA-Phe"
+FT   tRNA            1170..>1208
+FT                   /gene="trnF"
+FT                   /product="tRNA-Phe"
+XX
+SQ   Sequence 1208 BP; 476 A; 172 C; 201 G; 358 T; 1 other;
+     tatcaatcta atgaattcga tggttccggc agaactgaaa gaaaaagaat aaaggggaaa        60
+     gacatcacac tgagatccga atcttataac acaaaagggg atatggcgaa atcggtagac       120
+     gctacggact taattggctt gagccttagt atggagacct actaagtgaa aactttcaaa       180
+     ttcagagaaa ccctggaatt aataaaaaaa tgggcaatcc tgagccaact cctttattag       240
+     gaaaaaaaat aagaattcag aaaacaagaa taaaaaaaaa aaaaacaaag gataggtgca       300
+     gagactcaaa ggaagctgtt ctaacaaatg gagttgactg tgctgtgttg ttctaagaat       360
+     tctacttcaa tccaaaaagg gtgaagaata tactatataa aaaatcaata aaatatcaaa       420
+     tgattaatga caccccaaat ctattctgta tttttttttt gtaattttta tttatttcta       480
+     ttttctatta gagttataga atatgaaatt ctctctaaaa aaaaatctcg aatatgaaaa       540
+     tatgaatatg aaatgaaaaa aaaaaaaata tatataatta ttattatgaa tatgaaaaaa       600
+     tggaagaatt tttacgaatc aatttcaagt tgaaatttga aaaaagaatc aaatattcat       660
+     tcatcaaatc attcattcca tagtctgata gatcttttga agagctgatt aatcggacga       720
+     gaataaagat agagtcccmt tctacatgtc aatactgaca acaatgaaat ttatagtaag       780
+     aggaaaatcc gttgacttta caaatcgtga gggttcaagt ccctctatcc ccaaaagctt       840
+     tttttactcc cgaactagtt atcttttttt ttttcaaaat ggatctggac ggaagcattt       900
+     ttctcttata acaagtcttg tgatatatga tagacgtaca aataactatc tttgagtaag       960
+     gagtactcag gagtactcaa ttgaatgatt cacaattcat attattactc acactaatca      1020
+     aattatagac aaatttggaa ttggaagacc aaagagattc cgatacctag ataagacttt      1080
+     gtaatgcctt tctttttttt ttttaattga catagacccg acttatcgag taaaatgaga      1140
+     agatgatgca acagaagggc aaatgaatag tcgggatagc tcagctggta gagcagagga      1200
+     ctgaaaat                                                               1208
+//
+ID   AC0056; SV 1; linear; genomic DNA; ; PLN; 1189 BP.
+XX
+AC   AC0056;
+XX
+DE   Pandiaka angustifolia trnT-trnL intergenic spacer, partial sequence;
+DE   tRNA-Leu (trnL) gene, complete sequence; trnL-trnF intergenic spacer,
+DE   complete sequence; and tRNA-Phe (trnF) gene, partial sequence, isolate
+DE   AC0056
+XX
+OS   .
+OC   .
+XX
+RN   [1]
+RA   Di Vincenzo V.; Gruenstaeudl M.
+RT   ;
+RL   Submitted (27-MAR-2018) to the INSDC.
+RL   Di Vincenzo V., Institut fuer Biologie-Botanik, Freie Universitaet 
+RL   Berlin, Altensteinstr 6, 14195 Berlin, Germany
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   source          1..1189
+FT                   /country="Burkina Faso"
+FT                   /mol_type="genomic DNA"
+FT                   /isolate="AC0056"
+FT                   /organism="Pandiaka angustifolia"
+FT                   /specimen_voucher="J. Muller 324 (FR)"
+FT   misc_feature    1..98
+FT                   /note="trnT-trnL intergenic spacer"
+FT   gene            join(99..133,568..823)
+FT                   /gene="trnL"
+FT                   /product="tRNA-Leu"
+FT   tRNA            join(99..133,568..823)
+FT                   /gene="trnL"
+FT                   /product="tRNA-Leu"
+FT   intron          133..567
+FT                   /gene="trnL"
+FT   misc_feature    568..1150
+FT                   /note="trnL-trnF intergenic spacer"
+FT   gene            1151..>1189
+FT                   /gene="trnF"
+FT                   /product="tRNA-Phe"
+FT   tRNA            1151..>1189
+FT                   /gene="trnF"
+FT                   /product="tRNA-Phe"
+XX
+SQ   Sequence 1189 BP; 463 A; 171 C; 201 G; 354 T; 0 other;
+     tatcaatcta atgaattcga cggttccgtc cgaactgaaa gaaaaagaat aaatgggaaa        60
+     gacatcacac tgagatccga atcttataac aaaaaaaagg gggatatggc gaaatcggta       120
+     gacgctacgg acttaattgg cttgagcctt agtatggaga cctactaagt gaaaactttc       180
+     aaattcagag aaaccctgga attaataaaa aaatgggcaa tcctgagcca actcctttat       240
+     taggaaaatt aggaaaaaaa aaagaattca gaaaacaaaa aaaaaaacaa aggataggtg       300
+     cagagactca aaggaagctg ttctaacaaa tggagttgac tgtgctgtgt tgttctaaga       360
+     attctacatc aattcaaaaa gggtgaagaa tataaaaaaa ataaaatatc aaatgattaa       420
+     tgacacccaa aatctattct gtattttttt ttgtaatttt tatttatttc tattttctat       480
+     tagagttata gaatatgaaa ttctctctaa ataaaactaa ataaaaatgt cgaatatgaa       540
+     atgaaaaaat atatatatta tatataattc ttattatgaa tatgaaaaaa tggaagaatt       600
+     tttacgaatc aatttcaagt tgaaatttga aaaaagaatc aaatattcat tcatcaaatc       660
+     atttactcca ttgtctgata gatcttttga agagctgatt aatcggacga gaataaagat       720
+     agagtcccat tctacatgtc aatactgaca acaatgaaat ttatagtaag aggaaaatcc       780
+     gtcgactttc aaaatcgtga gggttcaagt ccctctatcc ccaaaagctt ttttactccc       840
+     gaactagtta tccttttttt tcttttcaaa atgaatccgg acggaagcat ttttctctta       900
+     taacaagtct tgtgatatat gatagacgta caaatgactt actttgagta aggagtactc       960
+     aattgaatga ttcacaattc atattattac tcacactaat caaattatag acaaatttgg      1020
+     aattggaaga ccaaagagat tctggtacct agataagact ttgtaatgcc tttctttttt      1080
+     tttttaattg acatagaccc gacttagcga gtaaaatgag aagatgatgc gacagaaggg      1140
+     cgaatgaata gtcgggatag ctcagctggt agagcagagg actgaaaat                  1189
+//

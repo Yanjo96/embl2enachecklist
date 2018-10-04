@@ -20,7 +20,7 @@ import MyExceptions as ME
 __author__ = 'Michael Gruenstaeudl <m.gruenstaeudl@fu-berlin.de>'
 __copyright__ = 'Copyright (C) 2016-2018 Michael Gruenstaeudl'
 __info__ = 'embl2enachecklists'
-__version__ = '2018.06.27.2030'
+__version__ = '2018.10.04, Version 0.1.0'
 
 class GUI():
 
@@ -218,7 +218,7 @@ class GUI():
                 E2E.embl2enachecklists(self.inFile.get(), self.outFile.get(), 'gb', self.clType.get(), self.isEnv)
                 self.ready()
             else:
-                raise ME.WrongInputFile('Be shure your inputfile is in embl format')
+                raise ME.WrongInputFile('Be sure your inputfile is in embl format')
 
         except Exception as error:
             try:
@@ -304,7 +304,7 @@ class GUI():
         errorWindow.configure(background=GlobVars.bg)
 
         #Label
-        errorMessage= tk.Message(master = errorWindow, text = error.value, width='400')
+        errorMessage= tk.Message(master = errorWindow, text = error.value, width='400',background = GlobVars.bg, foreground = GlobVars.fg)
         errorMessage.place(x=10,y=10, width=400, height=40)
 
         #Button
@@ -347,16 +347,16 @@ class GUI():
     def doneMessage(self):
         doneWindow = tk.Tk()
         doneWindow.title("embl2enachecklist")
-        doneWindow.geometry("420x110")
+        doneWindow.geometry("420x160")
         doneWindow.configure(background=GlobVars.bg)
 
         #Label
-        doneLabel = tk.Label(master = doneWindow, text = "Done! :D\n You can find your output here: " + self.outFile.get(), background = GlobVars.bg, foreground = GlobVars.fg)
-        doneLabel.place(x=10, y=10, width=400, height=40)
+        doneLabel = tk.Message(master = doneWindow, text = "Done! :D\nYou can find your output here: " + self.outFile.get(), width = 400, background = GlobVars.bg, foreground = GlobVars.fg)
+        doneLabel.place(x=10, y=10, width=400, height=100)
 
         #Button
         doneButton = tk.Button(master = doneWindow, text="Nice", command=doneWindow.destroy, background = GlobVars.buttonbg, foreground = GlobVars.buttonfg)
-        doneButton.place(x=160, y=60, width=110, height=40)
+        doneButton.place(x=160, y=110, width=110, height=40)
 
 
 
